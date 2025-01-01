@@ -1,3 +1,19 @@
-git add codemagic.yaml
-git commit -m 'Add first workflow'
-git push 
+workflows:
+  default-workflow:
+    name: Flutter Workflow
+    environment:
+      flutter: stable
+      xcode: latest
+      vars:
+        ANDROID_KEYSTORE: Encrypted(...) # Add your encrypted keystore here if needed
+    scripts:
+      - name: Install Flutter dependencies
+        script: flutter pub get
+      - name: Run tests
+        script: flutter test
+    artifacts:
+      - build/**  # Collect build artifacts
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com
